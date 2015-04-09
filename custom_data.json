@@ -1,0 +1,18 @@
+var data = {
+"markers":[
+    {"latitude":-20.881547 ,"longitude": 55.452384},
+    {"latitude":-20.881808  ,"longitude": 55.451118},
+    {"latitude":-20.882008  ,"longitude": 55.451418},
+    {"latitude":-20.882208  ,"longitude": 55.451349},
+    {"latitude":-20.897632  ,"longitude": 55.474944},
+    {"latitude":-20.899336  ,"longitude": 55.475395},
+    {"latitude":-20.897632  ,"longitude": 55.474944},
+    {"latitude":-20.897502  ,"longitude": 55.474744},
+    {"latitude":-20.899502  ,"longitude": 55.473744},
+    {"latitude":-20.897451  ,"longitude": 55.476790},
+    {"latitude":-20.939262  ,"longitude": 55.296781},
+    {"latitude":-21.140014  ,"longitude": 55.295322},
+    {"latitude":-21.129827  ,"longitude": 55.295644},
+    {"latitude":-21.349128  ,"longitude": 55.528674},
+    ]
+};

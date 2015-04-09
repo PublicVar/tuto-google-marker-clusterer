@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Google Maps Marker Clusterer</title>
+    </head>
+    <style>
+        #map{
+            width: 600px;
+            height: 400px;
+        }
+    </style>
+    <body>
+        <h1>Google Maps Clusterer Marker : custom icons</h1>
+      
+        <!-- the map's container -->
+        <div id="map"></div>
+        <p><a href="index.html">Simple example</a></p>
+        <!-- include the library -->
+        <script src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script>
+        <script src="js/markerclusterer_packed.js"></script>
+        <!-- this file contains the data -->
+        <script type="text/javascript" src="custom_data.json"></script>
+        <script>
+            /**
+            * List of different cluster icons
+            * url: (string)	The URL of the cluster icon image file. Required.
+            * width: (number) The display width (in pixels) of the cluster icon. Required.
+            * height: (number) The display height (in pixels) of the cluster icon. Required.
+            * textColor: (string) The color of the label text shown on the cluster icon. The default value is "black".
+            * textSize:	(number) The size (in pixels) of the label text shown on the cluster icon. The default value is 11.
+            * anchorText: Array	The position (in pixels) from the center of the cluster icon to where the text label is to be centered and drawn. The format is [yoffset, xoffset] where yoffset increases             *             as you go down from center and xoffset increases to the right of center. The default is [0, 0].
+            */
+            var markerIcons = [{
+                url: 'images/people35.png',
+                width: 35,
+                height: 35,
+                textColor: '#ffffff',
+                anchorText: [5, 0],
+                textSize: 10
+            }, {
+                url: 'images/people45.png',
+                width: 45,
+                height: 45,
+                anchorText: [5, 0],
+                textColor: '#ffffff',
+                textSize: 11
+            }, {
+                url: 'images/people55.png',
+                width: 55,
+                height: 55,
+                textColor: '#ffffff',
+                anchorText: [5, 0],
+                textSize: 12
+            }];
+
+
+            /**
+            * This function will initialize the google maps
+            */
+            function initialize() {
+                /** 
+                * Create the center of the map
+                */
+                var center = new google.maps.LatLng(-21.112753, 55.518742);
+
+                /**
+                * Create the map 
+                */
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 9,
+                    center: center,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+
+                /**
+                * This array will contain all google maps marker
+                */
+                var markers = [];
+                /**
+                * Create the markers according to the data variable in custom_data.js
+                * it's more readable and maintainable to put the map's markers in an external files
+                */
+                for (var i = 0; i < data.markers.length ; i++) {
+                    var dataMarker = data.markers[i];
+                    var latLng = new google.maps.LatLng(dataMarker.latitude,
+                                                        dataMarker.longitude);
+                    /**
+                    * Create a marker
+                    */
+                    var marker = new google.maps.Marker({
+                        position: latLng
+                    });
+                    markers.push(marker);
+                }
+
+                /**
+                * Add all markers created to the MarkerClusterer
+                * And set the markerIcons
+                */
+                var markerCluster = new MarkerClusterer(map, markers,{
+                    styles: markerIcons
+                });
+            }
+
+            /**
+            * Load the map only when the dom is reaady
+            */
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+    </body>
+</html>

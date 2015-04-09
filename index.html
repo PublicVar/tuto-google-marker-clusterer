@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Google Maps Marker Clusterer</title>
+    </head>
+    <style>
+        #map{
+            width: 600px;
+            height: 400px;
+        }
+    </style>
+    <body>
+       <h1>Google Maps Clusterer Marker</h1>
+       
+       <!-- the map's container -->
+        <div id="map"></div>
+        <p><a href="custom_icons.html">Example with custom icons</a></p>
+        <!-- include the library -->
+        <script src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script>
+        <script src="js/markerclusterer_packed.js"></script>
+        <!-- this file contains the data -->
+        <script type="text/javascript" src="custom_data.json"></script>
+        <script>
+            /**
+            * This function will initialize the google maps
+            */
+            function initialize() {
+                /** 
+                * Create the center of the map
+                */
+                var center = new google.maps.LatLng(-21.112753, 55.518742);
+
+                /**
+                * Create the map 
+                */
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 9,
+                    center: center,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+                
+                /**
+                * This array will contain all google maps marker
+                */
+                var markers = [];
+                /**
+                * Create the markers according to the data variable in custom_data.js
+                * it's more readable and maintainable to put the map's markers in an external files
+                */
+                for (var i = 0; i < data.markers.length ; i++) {
+                    var dataMarker = data.markers[i];
+                    var latLng = new google.maps.LatLng(dataMarker.latitude,
+                                                        dataMarker.longitude);
+                    /**
+                    * Create a marker
+                    */
+                    var marker = new google.maps.Marker({
+                        position: latLng
+                    });
+                    markers.push(marker);
+                }
+                
+                /**
+                * Add all markers created to the MarkerClusterer
+                * It's here where the "magic" happen
+                */
+                var markerCluster = new MarkerClusterer(map, markers);
+            }
+            
+            /**
+            * Load the map only when the dom is reaady
+            */
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+    </body>
+</html>
